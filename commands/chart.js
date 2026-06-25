@@ -5,8 +5,9 @@ export async function showChart() {
     console.clear();
     console.log(chalk.cyanBright('\n=== GRAFIK AKTIVITAS ===\n'));
     
-    const termWidth = process.stdout.columns || 50;
-    const maxBars = Math.max(10, Math.min(termWidth - 10, 40));
+    const termWidth = process.stdout.columns || 80;
+    const isMobile = termWidth < 90;
+    const maxBars = isMobile ? 20 : Math.max(10, Math.min(termWidth - 10, 40));
 
     const months = ['Jan', 'Feb', 'Mar', 'Apr'];
     const values = [7, 11, 5, 9];

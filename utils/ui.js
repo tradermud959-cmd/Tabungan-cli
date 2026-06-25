@@ -76,7 +76,17 @@ export async function showMenu() {
 }
 
 export function showError(msg) {
-    console.log(boxen(chalk.redBright('❌ ERROR\n\n' + msg), { padding: 1, borderColor: 'red' }));
+    const termWidth = process.stdout.columns || 80;
+    if (termWidth < 90) {
+        const sep = chalk.red('┌────────────────────────┐');
+        const sep2 = chalk.red('└────────────────────────┘');
+        console.log(sep);
+        console.log(chalk.redBright('❌ ERROR'));
+        console.log(msg);
+        console.log(sep2);
+    } else {
+        console.log(boxen(chalk.redBright('❌ ERROR\n\n' + msg), { padding: 1, borderColor: 'red' }));
+    }
 }
 
 export function showSuccess(msg) {
